@@ -11,8 +11,8 @@ namespace VirtualPet
         //Fields-at least 3
         private int hunger;
         private int thirst;
-        private string sleep;
-        private string exercise;
+        private int sleep;
+        private int exercise;
 
         //Properties-at least 3
         public int Hunger
@@ -25,17 +25,30 @@ namespace VirtualPet
             get { return this.thirst; }
             set { this.thirst = value; }
         }
-        public string Sleep
+        public int Sleep
         {
             get { return this.sleep; }
             set { this.sleep = value; }
         }
-        public string Exercise
+        public int Exercise
         {
             get { return this.exercise; }
             set { this.exercise = value; }
         }
-        //Constructors- at least 1
+
+        //Constructors- at least 
+        public VirtualPet()
+        {
+
+        }
+        public VirtualPet(int hunger, int thirst, int sleep, int exercise)
+        {
+            this.hunger = hunger;
+            this.thirst = thirst;
+            this.sleep = sleep;
+            this.exercise = exercise;
+        }
+
         //Methods- at leat 3 including TICK method
     }
 }
