@@ -13,7 +13,6 @@ namespace VirtualPet
         private bool isBored;
         private bool isTired;
         private bool isSick;
-        private string mood;
 
         //Properties-at least 3
         public bool IsHungry
@@ -36,11 +35,6 @@ namespace VirtualPet
             get { return this.isSick; }
             set { this.isSick = value; }
         }
-        public string Mood
-        {
-            get { return this.mood; }
-            set { this.mood = value; }
-        }
 
         //Constructors- at least 
         public VirtualPet()
@@ -48,57 +42,72 @@ namespace VirtualPet
 
         }
 
-
         //Methods- at leat 3 including TICK method
-        // method for pet's mood
         public string Feed()
         {
-            if (IsHungry == false)
+            string message = string.Empty;
+            if (IsHungry)
             {
-                IsHungry = true;
-                return "You fed pet.";
+                message = "Sam took what you gave him.";
             }
             else
             {
-                return "pet has already eaten.";
+                message = "Sam is not hungry right now.";
             }
+            Tick();
+            IsHungry = false;
+            return message;
         }
         public string Talk()
         {
-            if (IsBored == false)
+            string message = string.Empty;
+            if (IsBored)
             {
-                IsBored = true;
-                return "You just had a conversation with Sam.";
+                message = "Sam wishes you to have a conversation with you.";
             }
             else
             {
-                return "Sam is already talking to itself.";
+                message = "Sam is already talking to itself.";
             }
+            return message;
         }
         public string Sleep()
         {
-            if (IsTired == false)
+            string message = string.Empty;
+            if (IsTired)
             {
-                IsTired = true;
-                return "Sam just had a nap.";
+                message = "Sam needs a nap.";
             }
             else
             {
-                return "Sam already took a nap.";
+                message = "Sam already took a nap.";
             }
+            Tick();
+            IsTired = false;
+            return message;
         }
         public string Health()
         {
-            if (IsSick == false)
+            string message = string.Empty;
+            if (IsSick)
             {
-                IsSick = true;
-                return "Sam just got back from the vet.";
+                message = "Time to take Sam to the vet.";
             }
             else
             {
-                return "Sam already went to the vet.";
+                message = "Sam already went to the vet.";
             }
+            Tick();
+            IsSick = false;
+            return message;
         }
-        
+        public void Tick()
+        {
+            Random careOptions = new Random();
+            IsHungry = (careOptions.Next(1, 20) == 3 || IsHungry);
+            IsBored = (careOptions.Next(1, 10)  == 1  || IsBored);
+            IsTired = (careOptions.Next(1, 15) == 7 || IsTired);
+            IsSick = (careOptions.Next(1, 50)  == 25 || IsSick);
+        }
     }
 }
