@@ -36,10 +36,17 @@ namespace VirtualPet
             set { this.isSick = value; }
         }
 
-        //Constructors- at least 
+        //Constructors- at least 1
         public VirtualPet()
         {
 
+        }
+        public VirtualPet(bool isHungry, bool isBored, bool isTired, bool isSick)
+        {
+            this.isHungry = isHungry;
+            this.isBored = isBored;
+            this.isTired = isTired;
+            this.isSick = isSick;
         }
 
         //Methods- at leat 3 including TICK method
@@ -48,7 +55,7 @@ namespace VirtualPet
             string message = string.Empty;
             if (IsHungry)
             {
-                message = "Sam took what you gave him.";
+                message = "Sam wants a cracker.";
             }
             else
             {
@@ -69,6 +76,7 @@ namespace VirtualPet
             {
                 message = "Sam is already talking to itself.";
             }
+            IsBored = false;
             return message;
         }
         public string Sleep()
@@ -104,9 +112,9 @@ namespace VirtualPet
         public void Tick()
         {
             Random careOptions = new Random();
-            IsHungry = (careOptions.Next(1, 20) == 3 || IsHungry);
-            IsBored = (careOptions.Next(1, 10)  == 1  || IsBored);
-            IsTired = (careOptions.Next(1, 15) == 7 || IsTired);
+            IsHungry = (careOptions.Next(1,5) == 3 || IsHungry);
+            IsBored = (careOptions.Next(1,3)  == 1  || IsBored);
+            IsTired = (careOptions.Next(1, 8) == 7 || IsTired);
             IsSick = (careOptions.Next(1, 50)  == 25 || IsSick);
         }
     }
