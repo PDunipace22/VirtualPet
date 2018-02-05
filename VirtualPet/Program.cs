@@ -8,36 +8,44 @@ namespace VirtualPet
 {
     class Program
     {
+        static Random responseOption = new Random();
+        static string[] hungryResponses = { "Sam wants a cracker.", "Sam wants a gummy bear.", "Sam wants a bowl of soup." };
+        static string[] boredResponses = { "Pretty boy! Pretty boy!", "Let's have a party.", "Where's Bob?"};
+    
         static void Main(string[] args)
         {
             //create an interactive console window
             //Prompt user to choose what to do with the virtual pet
             //Call methods on virtual pet object to do what the user wants
             int userChoice;
-            VirtualPet bird = new VirtualPet();
+
+            string lastResponse = string.Empty;
+            VirtualPet bird = new VirtualPet(false, true, true, false);
             do
             {
                 Console.Clear();
                 Console.WriteLine("Sam the Mynah Bird");
                 ShowSam(bird);
                 Status(bird);
-                Console.WriteLine("");
+                Console.WriteLine(string.Empty);
                 Menu();
-                Console.WriteLine("");
+                Console.WriteLine(string.Empty);
+                Console.WriteLine(lastResponse);
                 userChoice = int.Parse(Console.ReadLine());
+                lastResponse = string.Empty;
                 switch (userChoice)
                 {
                     case 1:
-                        Console.WriteLine(bird.Feed());
+                        lastResponse = bird.Feed();
                         break;
                     case 2:
-                        Console.WriteLine(bird.Health());
+                        lastResponse = bird.Health();
                         break;
                     case 3:
-                        Console.WriteLine(bird.Talk());
+                        lastResponse = bird.Talk();
                         break;
                     case 4:
-                        Console.WriteLine(bird.Sleep());
+                        lastResponse = bird.Sleep();
                         break;
                     default:
                         bird.Tick();
@@ -49,7 +57,7 @@ namespace VirtualPet
 
         static void Status(VirtualPet bird)
         {
-            if(bird.IsHungry)
+            if (bird.IsHungry)
             {
                 Console.WriteLine("Sam is hungry.");
             }
@@ -67,7 +75,7 @@ namespace VirtualPet
             }
             if(!bird.IsHungry && !bird.IsSick && !bird.IsBored && !bird.IsTired)
             {
-                Console.WriteLine("Sam is fine.");
+                Console.WriteLine("Sam is happy.");
             }
          
         }
@@ -118,7 +126,7 @@ namespace VirtualPet
         static void HungrySam()
         {
             Console.WriteLine("  ___");
-            Console.WriteLine(" ('v') < Sam wants a gummy bear.");
+            Console.WriteLine(" ('v') < " + hungryResponses[responseOption.Next(1,4)]);
             Console.WriteLine("((   ))");
             Console.WriteLine("  ^ ^");
         }
@@ -142,9 +150,9 @@ namespace VirtualPet
         static void BoredSam()
         {
             Console.WriteLine("  ___");
-            Console.WriteLine(" ('v') < I am a handsome boy.");
+            Console.WriteLine(" ('v') <" + boredResponses[responseOption.Next(1,4)]);
             Console.WriteLine("((   ))");
             Console.WriteLine("  ^ ^");
         }
     } 
-}
+} 

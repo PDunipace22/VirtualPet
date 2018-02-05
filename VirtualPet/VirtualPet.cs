@@ -13,7 +13,8 @@ namespace VirtualPet
         private bool isBored;
         private bool isTired;
         private bool isSick;
-
+        
+        
         //Properties-at least 3
         public bool IsHungry
         {
@@ -55,7 +56,7 @@ namespace VirtualPet
             string message = string.Empty;
             if (IsHungry)
             {
-                message = "Sam wants a cracker.";
+                message = "You just fed Sam.";
             }
             else
             {
@@ -70,11 +71,11 @@ namespace VirtualPet
             string message = string.Empty;
             if (IsBored)
             {
-                message = "Sam wishes you to have a conversation with you.";
+                message = "You just finished talking to Sam.";
             }
             else
             {
-                message = "Sam is already talking to itself.";
+                message = "Sam is already talking to himself.";
             }
             IsBored = false;
             return message;
@@ -84,7 +85,7 @@ namespace VirtualPet
             string message = string.Empty;
             if (IsTired)
             {
-                message = "Sam needs a nap.";
+                message = "Sam just took a nap.";
             }
             else
             {
@@ -99,7 +100,7 @@ namespace VirtualPet
             string message = string.Empty;
             if (IsSick)
             {
-                message = "Time to take Sam to the vet.";
+                message = "Sam just went to the vet.";
             }
             else
             {
@@ -113,9 +114,11 @@ namespace VirtualPet
         {
             Random careOptions = new Random();
             IsHungry = (careOptions.Next(1,5) == 3 || IsHungry);
-            IsBored = (careOptions.Next(1,3)  == 1  || IsBored);
-            IsTired = (careOptions.Next(1, 8) == 7 || IsTired);
-            IsSick = (careOptions.Next(1, 50)  == 25 || IsSick);
+            IsBored = (careOptions.Next(1,7)  == 1  || IsBored);
+            IsTired = (careOptions.Next(1,8) == 7 || IsTired);
+            IsSick = (careOptions.Next(1,20)  == 10 || IsSick);
         }
+        
+
     }
 }
